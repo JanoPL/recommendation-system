@@ -1,0 +1,37 @@
+{
+  "name": "janopl/recommendation-system",
+  "type": "project",
+  "description": "Recommendation system",
+  "license": "apache-2.0",
+  "require": {
+    "php": "^8.1",
+    "ext-mbstring": "*"
+  },
+  "require-dev": {
+    "ext-xdebug": "^3.1",
+    "phpunit/phpunit": "^10.0",
+    "symfony/var-dumper": "^6.3"
+  },
+  "autoload": {
+    "psr-4": {
+      "Recommendations\\" : "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Recommendations\\Tests\\": "tests/",
+      "Recommendations\\Tests\\Data\\": "tests/data/"
+    }
+  },
+  "scripts": {
+    "tests": "vendor/bin/phpunit tests",
+    "post-update-cmd": [
+      "@php vendor/bin/phpunit tests"
+    ],
+    "post-install-cmd": [
+      "@php vendor/bin/phpunit tests"
+    ]
+  },
+  "minimum-stability": "stable",
+  "prefer-stable": true
+}
