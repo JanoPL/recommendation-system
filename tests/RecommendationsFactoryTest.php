@@ -5,12 +5,13 @@ namespace Recommendations\Tests;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Recommendations\Factories\RecommendationFactory;
+use Recommendations\Filters\EvenCriteria;
 use Recommendations\Filters\MultiWordsCriteria;
 use Recommendations\Filters\RandomCriteria;
-use Recommendations\Filters\ReturnEvenWCriteria;
+use Recommendations\Filters\WCriteria;
 use Recommendations\Tests\Data\Movies;
 
-class RecommendationsTest extends TestCase
+class RecommendationsFactoryTest extends TestCase
 {
     protected object $data;
 
@@ -38,15 +39,24 @@ class RecommendationsTest extends TestCase
         $actual = $factory->doFactory(new RandomCriteria(), $this->data->movies);
 
         $this->assertCount(3, $actual);
-
     }
 
     #[DataProvider('evenWMovies')]
-    public function test_return_item_started_W_and_even_char($needle): void
+    public function test_return_item_started_w($needle): void
     {
         $factory = new RecommendationFactory();
 
-        $actual = $factory->doFactory(new ReturnEvenWCriteria(), $this->data->movies);
+        $actual = $factory->doFactory(new WCriteria(), $this->data->movies);
+
+        $this->assertContains($needle, $actual);
+    }
+
+    #[DataProvider('evenWMovies')]
+    public function test_return_item_with_event_characters($needle): void
+    {
+        $factory = new RecommendationFactory();
+
+        $actual = $factory->doFactory(new EvenCriteria(), $this->data->movies);
 
         $this->assertContains($needle, $actual);
     }
