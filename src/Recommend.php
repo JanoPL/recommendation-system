@@ -3,9 +3,11 @@
 namespace Recommendations;
 
 use Recommendations\Factories\RecommendationFactory;
+use Recommendations\Filters\EvenCriteria;
 use Recommendations\Filters\MultiWordsCriteria;
 use Recommendations\Filters\RandomCriteria;
 use Recommendations\Filters\ReturnEvenWCriteria;
+use Recommendations\Filters\WCriteria;
 
 class Recommend
 {
@@ -23,7 +25,8 @@ class Recommend
 
     public function multiEvenW($data)
     {
-        return $this->method->doFactory(new ReturnEvenWCriteria(), $data);
+        $data = $this->method->doFactory(new EvenCriteria(), $data);
+        return $this->method->doFactory(new WCriteria(), $data);
     }
 
     public function multiWords($data)
