@@ -25,7 +25,7 @@ class Movies
         "Doktor Strange",
         "Szeregowiec Ryan",
         "Lot nad kukułczym gniazdem",
-        "Wielki Gatsby",
+        "Wielki Gatsby", // duplication
         "Avengers: Wojna bez granic",
         "Życie jest piękne",
         "Pożegnanie z Afryką",
@@ -85,7 +85,7 @@ class Movies
         "Granica",
         "Hobbit: Niezwykła podróż",
         "Pachnidło: Historia mordercy",
-        "Wielki Gatsby",
+        "Wielki Gatsby", // duplication
         "Titanic",
         "Sin City",
         "Przeminęło z wiatrem",
