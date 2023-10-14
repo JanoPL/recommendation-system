@@ -27,14 +27,5 @@ class MultiWordsCriteria extends BaseCriteria implements RecommendationsInterfac
 
             return false;
         }, ARRAY_FILTER_USE_BOTH);
-
-//        foreach ($this->removedSpecialChar($data) as $key => $item) {
-//            $check = str_word_count($item);
-//            if ($check > 1) {
-//                $results[] = $data[$key];
-//            }
-//        }
-//
-//        return $results;
     }
 }
