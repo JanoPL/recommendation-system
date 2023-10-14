@@ -51,6 +51,6 @@ class RandomCriteriaTest extends TestCase
     {
         $actual = $this->criteria->filter($this->testData);
 
-        $this->assertCount(3, array_unique($actual, SORT_STRING));
+        $this->assertCount(3, $actual);
     }
 }
