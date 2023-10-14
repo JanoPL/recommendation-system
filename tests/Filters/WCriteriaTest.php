@@ -3,10 +3,10 @@
 namespace Recommendations\Tests\Filters;
 
 use Recommendations\Exceptions\ArrayEmptyException;
-use Recommendations\Filters\ReturnEvenWCriteria;
+use Recommendations\Filters\WCriteria;
 use PHPUnit\Framework\TestCase;
 
-class ReturnEvenWCriteriaTest extends TestCase
+class WCriteriaTest extends TestCase
 {
     protected $criteria;
 
@@ -21,7 +21,7 @@ class ReturnEvenWCriteriaTest extends TestCase
 
     public function setUp(): void
     {
-        $this->criteria = new ReturnEvenWCriteria();
+        $this->criteria = new WCriteria();
         parent::setUp();
     }
 
@@ -32,13 +32,6 @@ class ReturnEvenWCriteriaTest extends TestCase
         $this->expectException(ArrayEmptyException::class);
 
         $this->criteria->filter($data);
-    }
-
-    public function test_even_return_elements(): void
-    {
-        $actual = $this->criteria->filter($this->testData);
-
-        $this->assertContains('westword', $actual);
     }
 
     public function test_return_elements_start_with_w(): void
