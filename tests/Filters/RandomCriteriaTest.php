@@ -39,8 +39,8 @@ class RandomCriteriaTest extends TestCase
      */
     public function test_return_random_elements(): void
     {
-
         $actual = $this->criteria->filter($this->testData);
+
         $this->assertCount(3, $actual);
     }
 

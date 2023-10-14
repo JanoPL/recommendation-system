@@ -17,14 +17,14 @@ class RandomCriteria extends BaseCriteria implements RecommendationsInterface
             throw new ArrayEmptyException();
         }
 
-        $randKey = array_rand($data, 3);
+        $randKeys = array_rand($data, 3);
 
-        return array_filter($data, function ($item, $key) use ($randKey) {
-            if (isset($randKey[$key])) {
-                return $item;
-            }
-
-            return false;
-        }, ARRAY_FILTER_USE_BOTH);
+        return array_unique(
+            array_filter(
+            $data,
+            fn ($key) => in_array($key, $randKeys),
+            ARRAY_FILTER_USE_KEY
+            )
+        );
     }
 }
