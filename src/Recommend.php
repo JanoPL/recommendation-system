@@ -6,7 +6,6 @@ use Recommendations\Factories\RecommendationFactory;
 use Recommendations\Filters\EvenCriteria;
 use Recommendations\Filters\MultiWordsCriteria;
 use Recommendations\Filters\RandomCriteria;
-use Recommendations\Filters\ReturnEvenWCriteria;
 use Recommendations\Filters\WCriteria;
 
 class Recommend
