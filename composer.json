@@ -24,13 +24,7 @@
     }
   },
   "scripts": {
-    "tests": "vendor/bin/phpunit tests",
-    "post-update-cmd": [
-      "@php vendor/bin/phpunit tests"
-    ],
-    "post-install-cmd": [
-      "@php vendor/bin/phpunit tests"
-    ]
+    "tests": "vendor/bin/phpunit tests"
   },
   "minimum-stability": "stable",
   "prefer-stable": true
