@@ -15,6 +15,6 @@ jobs:
       
       - name: Docker Image smoke test
         run: |
-          docker-compose -f docker\docker-compose.yml up --build \
+          docker-compose -f docker/docker-compose.yml up --build \
             --exit-code-from php-cli \
             test
