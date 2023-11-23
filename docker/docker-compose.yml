@@ -5,4 +5,10 @@ services:
     build:
       context: ./../
       dockerfile: ./docker/Dockerfile
+      args:
+        username: 'your_user' # if you like you can provide your linux username or keep as is
+        uid: '1000'
+        gid: 1000
     container_name: "recommendation_system"
+    environment:
+      - CI_MODE=true
