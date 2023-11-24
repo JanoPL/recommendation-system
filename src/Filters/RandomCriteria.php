@@ -7,7 +7,6 @@ use Recommendations\Interfaces\RecommendationsInterface;
 
 class RandomCriteria extends BaseCriteria implements RecommendationsInterface
 {
-
     /**
      * @throws ArrayEmptyException
      */

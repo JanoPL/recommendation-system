@@ -16,8 +16,6 @@ class MultiWordsCriteria extends BaseCriteria implements RecommendationsInterfac
             throw new ArrayEmptyException();
         }
 
-        $results = [];
-
         return array_filter($this->removedSpecialChar($data), function ($item) {
             $check = str_word_count($item);
 
