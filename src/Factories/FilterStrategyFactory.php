@@ -9,6 +9,7 @@ use Recommendations\Strategy\Strategies\MultiWordsStrategy;
 use Recommendations\Strategy\Strategies\RandomCriteriaStrategy;
 use Recommendations\Strategy\Strategies\SeasonsNumberStrategy;
 use Recommendations\Strategy\Strategies\WCriteriaStrategy;
+use Recommendations\StrategyEnum;
 
 class FilterStrategyFactory
 {
@@ -41,21 +42,20 @@ class FilterStrategyFactory
     }
 
     /**
-     * @param string $strategy even, genre, multi_words, random, season_number, w_criteria
+     * @param StrategyEnum $strategy
      * @param array $data
      * @return mixed
      * @throws StrategyNotDefinedException
      */
-    public function createStrategy(string $strategy, array $data): mixed
+    public function createStrategy(StrategyEnum $strategy, array $data): mixed
     {
         return match ($strategy) {
-            "even" => new EvenStrategy($data),
-            "genre" => new GenreStrategy($data),
-            "multi_words" => new MultiWordsStrategy($data),
-            "random" => new RandomCriteriaStrategy($data),
-            "seasons_number" => new SeasonsNumberStrategy($data),
-            "w_criteria" => new WCriteriaStrategy($data),
-            default => throw new StrategyNotDefinedException(),
+            StrategyEnum::Even => new EvenStrategy($data),
+            StrategyEnum::Genre => new GenreStrategy($data),
+            StrategyEnum::MultiWords => new MultiWordsStrategy($data),
+            StrategyEnum::Random => new RandomCriteriaStrategy($data),
+            StrategyEnum::SeasonNumber => new SeasonsNumberStrategy($data),
+            StrategyEnum::WCriteria => new WCriteriaStrategy($data),
         };
     }
 }

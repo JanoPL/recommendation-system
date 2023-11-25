@@ -7,21 +7,24 @@ use Recommendations\Strategy\interfaces\FilterStrategyInterface;
 
 class Context
 {
-    private FilterStrategyInterface $strategy;
+    private array $strategies;
 
-    public function __construct(FilterStrategyInterface $strategy)
+    public function __construct()
     {
-        $this->strategy = $strategy;
     }
 
-    public function setStrategy(FilterStrategyInterface $strategy): self
+    public function addStrategy(FilterStrategyInterface $strategy): self
     {
-        $this->strategy = $strategy;
+        $this->strategies[] = $strategy;
         return $this;
     }
 
     public function filter(): array
     {
-        return $this->strategy->filter();
+        foreach ($this->strategies as $strategy) {
+            $results = $strategy->filter();
+        }
+
+        return $results;
     }
 }

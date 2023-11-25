@@ -8,10 +8,15 @@ use Recommendations\Strategy\Interfaces\FilterStrategyInterface;
 class EvenStrategy extends BaseStrategy implements FilterStrategyInterface
 {
     /**
+     * @param array $data
      * @throws ArrayEmptyException
      */
-    public function filter(): array
+    public function filter(array $data = []): array
     {
+        if (!empty($data)) {
+            $this->data = $data;
+        }
+
         if (empty($this->data)) {
             throw new ArrayEmptyException();
         }
