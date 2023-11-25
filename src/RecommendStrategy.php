@@ -1,9 +1,10 @@
 <?php
 
+namespace Recommendations;
+
 use Recommendations\Exceptions\StrategyNotDefinedException;
 use Recommendations\Factories\FilterStrategyFactory;
 use Recommendations\Strategy\Context;
-use Recommendations\StrategyEnum;
 
 class RecommendStrategy
 {
