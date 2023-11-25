@@ -2,8 +2,9 @@
 
 namespace Recommendations\Tests;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use Recommendations\RecommendStrategy;
 use Recommendations\Tests\Data\Movies;
-use RecommendStrategy;
 use PHPUnit\Framework\TestCase;
 
 class RecommendStrategyTest extends TestCase

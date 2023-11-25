@@ -52,7 +52,7 @@ class RecommendationsFactoryTest extends TestCase
     }
 
     #[DataProvider('evenWMovies')]
-    public function test_return_item_with_event_characters($needle): void
+    public function test_return_item_with_even_characters($needle): void
     {
         $factory = new RecommendationFactory();
 

@@ -4,17 +4,10 @@ namespace Recommendations\Tests\Strategies;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
-use Recommendations\Exceptions\StrategyNotDefinedException;
 use Recommendations\Factories\FilterStrategyFactory;
 use Recommendations\Strategy\Context;
-use Recommendations\Strategy\Strategies\EvenStrategy;
-use Recommendations\Strategy\Strategies\GenreStrategy;
-use Recommendations\Strategy\Strategies\MultiWordsStrategy;
-use Recommendations\Strategy\Strategies\RandomCriteriaStrategy;
-use Recommendations\Strategy\Strategies\SeasonsNumberStrategy;
-use Recommendations\Strategy\Strategies\WCriteriaStrategy;
+use Recommendations\StrategyEnum;
 use Recommendations\Tests\Data\Movies;
-use Recommendations\Tests\Data\TestStrategy;
 
 class FilterContextTest extends TestCase
 {
@@ -48,29 +41,20 @@ class FilterContextTest extends TestCase
     {
         $factory = FilterStrategyFactory::getInstance();
 
-        $context = new Context($factory->createStrategy("random", $this->data->movies));
+        $context = new Context();
+        $context->addStrategy($factory->createStrategy(StrategyEnum::Random, $this->data->movies));
 
         $actual = $context->filter();
 
         $this->assertCount(3, $actual);
     }
 
-    public function test_strategy_exception(): void
-    {
-        $this->expectException(StrategyNotDefinedException::class);
-
-        $factory = FilterStrategyFactory::getInstance();
-
-        $context = new Context($factory->createStrategy("test", $this->data->movies), $this->data->movies);
-
-        $factory = $context->filter();
-    }
-
     #[DataProvider('evenWMovies')]
     public function test_return_item_started_w($needle): void
     {
         $factory = FilterStrategyFactory::getInstance();
-        $context = new Context($factory->createStrategy("w_criteria", $this->data->movies));
+        $context = new Context();
+        $context->addStrategy($factory->createStrategy(StrategyEnum::WCriteria, $this->data->movies));
 
         $actual = $context->filter();
 
@@ -78,11 +62,12 @@ class FilterContextTest extends TestCase
     }
 
     #[DataProvider('evenWMovies')]
-    public function test_return_item_with_event_characters($needle): void
+    public function test_return_item_with_even_characters($needle): void
     {
         $factory = FilterStrategyFactory::getInstance();
 
-        $context = new Context($factory->createStrategy("even", $this->data->movies));
+        $context = new Context();
+        $context->addStrategy($factory->createStrategy(StrategyEnum::Even, $this->data->movies));
         $actual = $context->filter();
 
         $this->assertContains($needle, $actual);
@@ -93,7 +78,8 @@ class FilterContextTest extends TestCase
     {
         $factory = FilterStrategyFactory::getInstance();
 
-        $context = new Context($factory->createStrategy("multi_words", $this->data->movies));
+        $context = new Context();
+        $context->addStrategy($factory->createStrategy(StrategyEnum::MultiWords, $this->data->movies));
         $actual = $context->filter();
 
         $this->assertContains($needle, $actual);
