@@ -14,7 +14,6 @@ class EvenCriteria extends BaseCriteria implements RecommendationsInterface
             throw new ArrayEmptyException();
         }
 
-
         return array_filter($data, function ($item) {
             $replace = $this->removedSpecialCharFromString($item);
             $replace = $this->removedWhiteSpaceCharFromString($replace);

@@ -8,13 +8,11 @@ use Recommendations\Interfaces\RecommendationsInterface;
 
 class WCriteria extends BaseCriteria implements RecommendationsInterface
 {
-
     public function filter(array $data): array
     {
         if (empty($data)) {
             throw new ArrayEmptyException();
         }
-
 
         return array_filter($data, function ($item) {
             $replace = $this->removedSpecialCharFromString($item);
