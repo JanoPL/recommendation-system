@@ -18,8 +18,8 @@ class MultiWordsStrategy extends BaseStrategy implements FilterStrategyInterface
             throw new ArrayEmptyException();
         }
 
-        return array_filter($this->removedSpecialChar($this->data), function ($item) {
-            $check = str_word_count($item);
+        return array_filter($this->data, function ($item) {
+            $check = str_word_count($this->removedSpecialCharFromString($item->getName()));
 
             if ($check > 1) {
                 return $item;

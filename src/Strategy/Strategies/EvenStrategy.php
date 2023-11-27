@@ -21,9 +21,8 @@ class EvenStrategy extends BaseStrategy implements FilterStrategyInterface
             throw new ArrayEmptyException();
         }
 
-
         return array_filter($this->data, function ($item) {
-            $replace = $this->removedSpecialCharFromString($item);
+            $replace = $this->removedSpecialCharFromString($item->getName());
             $replace = $this->removedWhiteSpaceCharFromString($replace);
 
             $count = mb_strlen($replace);

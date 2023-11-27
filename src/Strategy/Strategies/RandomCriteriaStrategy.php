@@ -20,12 +20,10 @@ class RandomCriteriaStrategy extends BaseStrategy implements FilterStrategyInter
 
         $randKeys = array_rand($this->data, 3);
 
-        return array_unique(
-            array_filter(
-                $this->data,
-                fn ($key) => in_array($key, $randKeys),
-                ARRAY_FILTER_USE_KEY
-            )
-        );
+      return array_filter(
+          $this->data,
+          fn ($key) => in_array($key, $randKeys),
+        ARRAY_FILTER_USE_KEY
+      );
     }
 }

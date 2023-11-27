@@ -21,7 +21,7 @@ class WCriteriaStrategy extends BaseStrategy implements FilterStrategyInterface
         return array_filter(
             $this->data,
             function ($item) {
-                $replace = $this->removedSpecialCharFromString($item);
+                $replace = $this->removedSpecialCharFromString($item->getName());
                 $replace = $this->removedWhiteSpaceCharFromString($replace);
 
                 $check = str_starts_with(mb_strtolower($replace), "w");

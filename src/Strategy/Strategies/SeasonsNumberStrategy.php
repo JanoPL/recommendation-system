@@ -10,14 +10,25 @@ class SeasonsNumberStrategy extends BaseStrategy implements FilterStrategyInterf
 
     /**
      * @param array $data
+     * @return array
      * @throws ArrayEmptyException
      */
     public function filter(array $data = []): array
     {
         if (empty($this->data)) {
+            $this->data = $data;
+        }
+
+        if (empty($this->data)) {
             throw new ArrayEmptyException();
         }
 
-        return [];
+        return array_filter($this->data, function ($item) {
+            if (method_exists(get_class($item), 'getSeasonNumber')) {
+                return $item;
+            }
+
+            return false;
+        }, ARRAY_FILTER_USE_BOTH);
     }
 }
