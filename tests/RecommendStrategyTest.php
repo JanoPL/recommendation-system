@@ -4,8 +4,10 @@ namespace Recommendations\Tests;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 use Recommendations\RecommendStrategy;
-use Recommendations\Tests\Data\Movies;
 use PHPUnit\Framework\TestCase;
+use Recommendations\Tests\Data\Movie;
+use Recommendations\Tests\Data\MoviesExtend;
+use Recommendations\Tests\Data\Series;
 
 class RecommendStrategyTest extends TestCase
 {
@@ -15,24 +17,49 @@ class RecommendStrategyTest extends TestCase
     protected function setUp(): void
     {
         $this->recommendStrategy = new RecommendStrategy();
-        $this->data = new Movies();
+        $this->data = new MoviesExtend();
         parent::setUp();
+    }
+
+    private static function createMovie(string $name): Movie
+    {
+        $movie = new Movie();
+        $movie->setName($name);
+        $movie->setGenre('test');
+
+        return $movie;
+    }
+
+    private static function createSeries(string $name): Series
+    {
+        $series = new Series();
+        $series->setName($name);
+        $series->setSeasonNumber(1);
+
+        return $series;
     }
 
     public static function multiWords()
     {
-        yield ["Skazani na Shawshank"];
-        yield ["Dwunastu gniewnych ludzi"];
-        yield ["Fight Club"];
-        yield ["Forrest Gump"];
-        yield ["Chłopaki nie płaczą"];
+        yield [self::createMovie("Skazani na Shawshank")];
+        yield [self::createMovie("Dwunastu gniewnych ludzi")];
+        yield [self::createMovie("Fight Club")];
+        yield [self::createMovie("Forrest Gump")];
+        yield [self::createMovie("Chłopaki nie płaczą")];
     }
 
     public static function EvenWords()
     {
-        yield ["Wielki Gatsby"];
-        yield ["Whiplash"];
-        yield ["Władca Pierścieni: Drużyna Pierścienia"];
+        yield [self::createMovie("Wielki Gatsby")];
+        yield [self::createMovie("Whiplash")];
+        yield [self::createMovie("Władca Pierścieni: Drużyna Pierścienia")];
+    }
+
+    public static function series()
+    {
+        yield [self::createSeries("Game of Thrones")];
+        yield [self::createSeries("Vikings")];
+        yield [self::createSeries("Luke Cage")];
     }
 
     #[DataProvider('multiWords')]
@@ -40,12 +67,15 @@ class RecommendStrategyTest extends TestCase
     {
         $actual = $this->recommendStrategy->multiWordsCriteria($this->data->movies);
 
-        $this->assertContains($needle, $actual);
+        $this->assertContainsEquals($needle, $actual);
     }
 
-    public function testSeasonNumberCriteria()
+    #[DataProvider('series')]
+    public function testSeasonNumberCriteria($needle)
     {
-        $this->markTestSkipped("not implemented yet");
+        $contains = $this->recommendStrategy->SeasonNumberCriteria($this->data->movies);
+
+        $this->assertContainsEquals($needle, $contains);
     }
 
     #[DataProvider('EvenWords')]
@@ -53,7 +83,7 @@ class RecommendStrategyTest extends TestCase
     {
         $actual = $this->recommendStrategy->multiEvenWCriteria($this->data->movies);
 
-        $this->assertContains($needle, $actual);
+        $this->assertContainsEquals($needle, $actual);
     }
 
     public function testRandomize()
@@ -63,8 +93,12 @@ class RecommendStrategyTest extends TestCase
         $this->assertCount(3, $actual);
     }
 
-    public function testGenreCriteria()
+    #[DataProvider('multiWords')]
+    public function testGenreCriteria($needle)
     {
-        $this->markTestSkipped("not implemented yet");
+        $actual = $this->recommendStrategy->genreCriteria($this->data->movies);
+
+        $this->assertContainsEquals($needle, $actual);
     }
+
 }

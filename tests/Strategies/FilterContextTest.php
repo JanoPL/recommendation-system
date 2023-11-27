@@ -7,7 +7,9 @@ use PHPUnit\Framework\TestCase;
 use Recommendations\Factories\FilterStrategyFactory;
 use Recommendations\Strategy\Context;
 use Recommendations\StrategyEnum;
-use Recommendations\Tests\Data\Movies;
+use Recommendations\Tests\Data\Movie;
+use Recommendations\Tests\Data\MoviesExtend;
+use Recommendations\Tests\Data\Series;
 
 class FilterContextTest extends TestCase
 {
@@ -16,25 +18,43 @@ class FilterContextTest extends TestCase
 
     public function setUp(): void
     {
-        $this->data = new Movies();
+        $this->data = new MoviesExtend();
+    }
+
+    private static function createMovie(string $name): Movie
+    {
+        $movie = new Movie();
+        $movie->setName($name);
+        $movie->setGenre('test');
+
+        return $movie;
+    }
+
+    private static function createSeries(string $name): Series
+    {
+        $series = new Series();
+        $series->setName($name);
+        $series->setSeasonNumber(1);
+
+        return $series;
+    }
+
+    private static function multiWordsSeries(): iterable
+    {
+        yield [self::createSeries('Luke Cage')];
+        yield [self::createSeries("Game of Thrones")];
     }
 
     public static function evenWMovies(): iterable
     {
-        yield ["Whiplash"];
-        yield ["Władca Pierścieni: Drużyna Pierścienia"];
+        yield [self::createMovie("Whiplash")];
+        yield [self::createMovie("Władca Pierścieni: Drużyna Pierścienia")];
     }
 
     public static function multiWordsMovies(): iterable
     {
-        yield ["Blade Runner"];
-        yield ["Wielki Gatsby"];
-    }
-
-    public static function genreMovie(): iterable
-    {
-        yield ['Crime'];
-        yield ['Drama'];
+        yield [self::createMovie("Blade Runner")];
+        yield [self::createMovie("Wielki Gatsby")];
     }
 
     public function test_return_random_item(): void
@@ -58,7 +78,7 @@ class FilterContextTest extends TestCase
 
         $actual = $context->filter();
 
-        $this->assertContains($needle, $actual);
+        $this->assertContainsEquals($needle, $actual);
     }
 
     #[DataProvider('evenWMovies')]
@@ -70,7 +90,7 @@ class FilterContextTest extends TestCase
         $context->addStrategy($factory->createStrategy(StrategyEnum::Even, $this->data->movies));
         $actual = $context->filter();
 
-        $this->assertContains($needle, $actual);
+        $this->assertContainsEquals($needle, $actual);
     }
 
     #[DataProvider('multiWordsMovies')]
@@ -82,28 +102,30 @@ class FilterContextTest extends TestCase
         $context->addStrategy($factory->createStrategy(StrategyEnum::MultiWords, $this->data->movies));
         $actual = $context->filter();
 
-        $this->assertContains($needle, $actual);
+        $this->assertContainsEquals($needle, $actual);
     }
 
-//    #[DataProvider('genreMovie')]
-//    public function test_item_with_genre($needle): void
-//    {
-//        $factory = FilterStrategyFactory::getInstance();
-//
-//        $context = new Context($factory->createStrategy("genre", $this->data->movies));
-//        $actual = $context->filter();
-//
-//        $this->assertContains($needle, $actual);
-//    }
-//
-//    #[DataProvider('seasonsMovie')]
-//    public function test_item_with_seasons_number($needle): void
-//    {
-//        $factory = FilterStrategyFactory::getInstance();
-//
-//        $context = new Context($factory->createStrategy("seasons_number", $this->data->movies));
-//        $actual = $context->filter();
-//
-//        $this->assertContains($needle, $actual);
-//    }
+    #[DataProvider('multiWordsMovies')]
+    public function test_item_with_genre($needle): void
+    {
+        $factory = FilterStrategyFactory::getInstance();
+
+        $context = new Context();
+        $context->addStrategy($factory->createStrategy(StrategyEnum::Genre, $this->data->movies));
+        $actual = $context->filter();
+
+        $this->assertContainsEquals($needle, $actual);
+    }
+
+    #[DataProvider('multiWordsSeries')]
+    public function test_item_with_seasons_number($needle): void
+    {
+        $factory = FilterStrategyFactory::getInstance();
+
+        $context = new Context();
+        $context->addStrategy($factory->createStrategy(StrategyEnum::SeasonNumber, $this->data->movies));
+        $actual = $context->filter();
+
+        $this->assertContainsEquals($needle, $actual);
+    }
 }
