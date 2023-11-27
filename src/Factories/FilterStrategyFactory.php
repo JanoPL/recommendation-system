@@ -27,7 +27,7 @@ class FilterStrategyFactory
     }
 
     // Prevent unserializing the factory
-    private function __wakeup()
+    public function __wakeup()
     {
     }
 
