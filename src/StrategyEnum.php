@@ -4,6 +4,7 @@ namespace Recommendations;
 
 enum StrategyEnum
 {
+    case All;
     case Even;
     case Genre;
     case MultiWords;
