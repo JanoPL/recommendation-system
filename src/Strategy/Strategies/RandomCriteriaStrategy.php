@@ -18,6 +18,11 @@ class RandomCriteriaStrategy extends BaseStrategy implements FilterStrategyInter
             throw new ArrayEmptyException();
         }
 
+        $count = count($this->data);
+        if ($count < 3 && $count > 0) {
+            return  $this->data;
+        }
+
         $randKeys = array_rand($this->data, 3);
 
       return array_filter(
