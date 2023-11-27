@@ -11,7 +11,7 @@ use Recommendations\Tests\Data\Series;
 
 class RecommendStrategyTest extends TestCase
 {
-    protected $recommendStrategy;
+    protected RecommendStrategy $recommendStrategy;
     protected object $data;
 
     protected function setUp(): void
@@ -39,7 +39,7 @@ class RecommendStrategyTest extends TestCase
         return $series;
     }
 
-    public static function multiWords()
+    public static function multiWords(): iterable
     {
         yield [self::createMovie("Skazani na Shawshank")];
         yield [self::createMovie("Dwunastu gniewnych ludzi")];
@@ -48,14 +48,14 @@ class RecommendStrategyTest extends TestCase
         yield [self::createMovie("Chłopaki nie płaczą")];
     }
 
-    public static function EvenWords()
+    public static function EvenWords(): iterable
     {
         yield [self::createMovie("Wielki Gatsby")];
         yield [self::createMovie("Whiplash")];
         yield [self::createMovie("Władca Pierścieni: Drużyna Pierścienia")];
     }
 
-    public static function series()
+    public static function series(): iterable
     {
         yield [self::createSeries("Game of Thrones")];
         yield [self::createSeries("Vikings")];
@@ -100,5 +100,4 @@ class RecommendStrategyTest extends TestCase
 
         $this->assertContainsEquals($needle, $actual);
     }
-
 }
