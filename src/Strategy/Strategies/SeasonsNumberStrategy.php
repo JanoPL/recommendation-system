@@ -7,7 +7,6 @@ use Recommendations\Strategy\Interfaces\FilterStrategyInterface;
 
 class SeasonsNumberStrategy extends BaseStrategy implements FilterStrategyInterface
 {
-
     /**
      * @param array $data
      * @return array

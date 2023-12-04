@@ -47,7 +47,7 @@ class RecommendStrategy
         return $context->filter();
     }
 
-    public function SeasonNumberCriteria($data): array
+    public function seasonNumberCriteria($data): array
     {
         $context = new Context();
         $context->addStrategy($this->factory->createStrategy(strategy: StrategyEnum::SeasonNumber, data: $data));

@@ -22,5 +22,7 @@ class RecommendationFactory extends RecommendationCreator
                 printf('<font style="color:red;">' . $exception->getMessage() . "</font>");
             }
         }
+
+        return [];
     }
 }

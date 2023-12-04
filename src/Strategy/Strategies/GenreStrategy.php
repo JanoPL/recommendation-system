@@ -7,7 +7,6 @@ use Recommendations\Strategy\Interfaces\FilterStrategyInterface;
 
 class GenreStrategy extends BaseStrategy implements FilterStrategyInterface
 {
-
     /**
      * @param array $data
      * @return array
@@ -27,6 +26,8 @@ class GenreStrategy extends BaseStrategy implements FilterStrategyInterface
             if (method_exists(get_class($item), 'getGenre')) {
                 return $item;
             }
+
+            return null;
         }, ARRAY_FILTER_USE_BOTH);
     }
 }

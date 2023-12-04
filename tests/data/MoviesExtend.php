@@ -5,7 +5,8 @@ namespace Recommendations\Tests\Data;
 class MoviesExtend
 {
     public array $movies = [];
-    public function __construct() {
+    public function __construct()
+    {
         $movies = new Movies();
 
         foreach ($movies->movies as $movieName) {

@@ -20,9 +20,9 @@ class RandomCriteria extends BaseCriteria implements RecommendationsInterface
 
         return array_unique(
             array_filter(
-            $data,
-            fn ($key) => in_array($key, $randKeys),
-            ARRAY_FILTER_USE_KEY
+                $data,
+                fn ($key) => in_array($key, $randKeys),
+                ARRAY_FILTER_USE_KEY
             )
         );
     }

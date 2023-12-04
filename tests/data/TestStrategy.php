@@ -7,7 +7,6 @@ use Recommendations\Strategy\Strategies\BaseStrategy;
 
 class TestStrategy extends BaseStrategy implements FilterStrategyInterface
 {
-
     public function filter(): array
     {
         return ['test'];

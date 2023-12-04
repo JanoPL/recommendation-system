@@ -7,7 +7,6 @@ use Recommendations\Interfaces\RecommendationsInterface;
 
 class EvenCriteria extends BaseCriteria implements RecommendationsInterface
 {
-
     public function filter(array $data): array
     {
         if (empty($data)) {

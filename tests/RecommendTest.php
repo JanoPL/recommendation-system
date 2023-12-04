@@ -1,4 +1,4 @@
-<?php
+<?php // phpcs:ignore PSR1.Methods.CamelCapsMethodName
 
 namespace Recommendations\Tests;
 
@@ -9,7 +9,7 @@ use Recommendations\Tests\Data\Movies;
 
 class RecommendTest extends TestCase
 {
-    protected $recommend;
+    protected Recommend $recommend;
     protected object $data;
 
     public function setUp(): void
@@ -19,7 +19,7 @@ class RecommendTest extends TestCase
         parent::setUp();
     }
 
-    public static function multiWords()
+    public static function multiWords(): iterable
     {
         yield ["Skazani na Shawshank"];
         yield ["Dwunastu gniewnych ludzi"];
@@ -28,7 +28,7 @@ class RecommendTest extends TestCase
         yield ["Chłopaki nie płaczą"];
     }
 
-    public static function EvenWords()
+    public static function evenWords(): iterable
     {
         yield ["Wielki Gatsby"];
         yield ["Whiplash"];
@@ -50,7 +50,7 @@ class RecommendTest extends TestCase
         $this->assertCount(3, $actual);
     }
 
-    #[DataProvider('EvenWords')]
+    #[DataProvider('evenWords')]
     public function testMultiEvenW($needle)
     {
         $actual = $this->recommend->multiEvenW($this->data->movies);

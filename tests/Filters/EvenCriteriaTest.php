@@ -1,4 +1,4 @@
-<?php
+<?php  // phpcs:ignore PSR1.Methods.CamelCapsMethodName
 
 namespace Recommendations\Tests\Filters;
 

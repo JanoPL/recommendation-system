@@ -7,7 +7,6 @@ use Recommendations\Strategy\Interfaces\FilterStrategyInterface;
 
 class MultiWordsStrategy extends BaseStrategy implements FilterStrategyInterface
 {
-
     /**
      * @param array $data
      * @throws ArrayEmptyException
