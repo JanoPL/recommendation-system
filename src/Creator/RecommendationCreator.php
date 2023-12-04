@@ -11,7 +11,7 @@ abstract class RecommendationCreator
      * @param array $data
      * @return mixed
      */
-    protected abstract function factoryMethod(RecommendationsInterface $criteria, array $data): mixed;
+    abstract protected function factoryMethod(RecommendationsInterface $criteria, array $data): mixed;
 
     /**
      * @param $criteria

@@ -1,0 +1,21 @@
+name: Analysis
+
+on:
+  pull_request:
+
+jobs:
+  phpcs:
+    runs-on: ubuntu-latest
+    container:
+      image: lorisleiva/laravel-docker:8.2
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: "check src"
+        run: |
+          phpcs --standard=PSR12 --extensions=php src/
+
+      - name: "check tests"
+        run: |
+          phpcs --standard=phpcs_ruleset.xml --extensions=php src/

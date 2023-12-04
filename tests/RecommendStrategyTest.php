@@ -1,4 +1,4 @@
-<?php
+<?php // phpcs:ignore PSR1.Methods.CamelCapsMethodName
 
 namespace Recommendations\Tests;
 
@@ -48,7 +48,7 @@ class RecommendStrategyTest extends TestCase
         yield [self::createMovie("Chłopaki nie płaczą")];
     }
 
-    public static function EvenWords(): iterable
+    public static function evenWords(): iterable
     {
         yield [self::createMovie("Wielki Gatsby")];
         yield [self::createMovie("Whiplash")];
@@ -73,12 +73,12 @@ class RecommendStrategyTest extends TestCase
     #[DataProvider('series')]
     public function testSeasonNumberCriteria($needle)
     {
-        $contains = $this->recommendStrategy->SeasonNumberCriteria($this->data->movies);
+        $contains = $this->recommendStrategy->seasonNumberCriteria($this->data->movies);
 
         $this->assertContainsEquals($needle, $contains);
     }
 
-    #[DataProvider('EvenWords')]
+    #[DataProvider('evenWords')]
     public function testMultiEvenWCriteria($needle)
     {
         $actual = $this->recommendStrategy->multiEvenWCriteria($this->data->movies);

@@ -12,5 +12,4 @@ class SeriesList
         "Narcos",
         "Luke Cage",
     ];
-
 }

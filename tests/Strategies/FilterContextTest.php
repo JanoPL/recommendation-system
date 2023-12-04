@@ -1,4 +1,4 @@
-<?php
+<?php // phpcs:ignore PSR1.Methods.CamelCapsMethodName
 
 namespace Recommendations\Tests\Strategies;
 
@@ -13,7 +13,6 @@ use Recommendations\Tests\Data\Series;
 
 class FilterContextTest extends TestCase
 {
-
     protected object $data;
 
     public function setUp(): void
@@ -39,7 +38,7 @@ class FilterContextTest extends TestCase
         return $series;
     }
 
-    private static function multiWordsSeries(): iterable
+    public static function multiWordsSeries(): iterable
     {
         yield [self::createSeries('Luke Cage')];
         yield [self::createSeries("Game of Thrones")];
