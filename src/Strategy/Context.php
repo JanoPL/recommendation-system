@@ -21,8 +21,13 @@ class Context
 
     public function filter(): array
     {
+        $results = [];
         foreach ($this->strategies as $strategy) {
-            $results = $strategy->filter();
+            if (empty($results)) {
+                $results = $strategy->filter();
+            } else {
+                $results = $strategy->filter($results);
+            }
         }
 
         return $results;
