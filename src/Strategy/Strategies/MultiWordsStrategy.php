@@ -9,6 +9,7 @@ class MultiWordsStrategy extends BaseStrategy implements FilterStrategyInterface
 {
     /**
      * @param array $data
+     * @return array
      * @throws ArrayEmptyException
      */
     public function filter(array $data = []): array

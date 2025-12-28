@@ -3,6 +3,7 @@
 namespace Recommendations\Tests;
 
 use PHPUnit\Framework\Attributes\DataProvider;
+use Recommendations\Exceptions\StrategyNotDefinedException;
 use Recommendations\RecommendStrategy;
 use PHPUnit\Framework\TestCase;
 use Recommendations\Tests\Data\Movie;
@@ -62,6 +63,9 @@ class RecommendStrategyTest extends TestCase
         yield [self::createSeries("Luke Cage")];
     }
 
+    /**
+     * @throws StrategyNotDefinedException
+     */
     #[DataProvider('multiWords')]
     public function testMultiWordsCriteria($needle)
     {
@@ -70,6 +74,9 @@ class RecommendStrategyTest extends TestCase
         $this->assertContainsEquals($needle, $actual);
     }
 
+    /**
+     * @throws StrategyNotDefinedException
+     */
     #[DataProvider('series')]
     public function testSeasonNumberCriteria($needle)
     {
@@ -78,6 +85,9 @@ class RecommendStrategyTest extends TestCase
         $this->assertContainsEquals($needle, $contains);
     }
 
+    /**
+     * @throws StrategyNotDefinedException
+     */
     #[DataProvider('evenWords')]
     public function testMultiEvenWCriteria($needle)
     {
@@ -86,6 +96,9 @@ class RecommendStrategyTest extends TestCase
         $this->assertContainsEquals($needle, $actual);
     }
 
+    /**
+     * @throws StrategyNotDefinedException
+     */
     public function testRandomize()
     {
         $actual = $this->recommendStrategy->randomize($this->data->movies);
@@ -93,6 +106,9 @@ class RecommendStrategyTest extends TestCase
         $this->assertCount(3, $actual);
     }
 
+    /**
+     * @throws StrategyNotDefinedException
+     */
     #[DataProvider('multiWords')]
     public function testGenreCriteria($needle)
     {

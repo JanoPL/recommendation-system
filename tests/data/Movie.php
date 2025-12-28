@@ -1,9 +1,6 @@
 <?php
 
 namespace Recommendations\Tests\Data;
-
-use PhpParser\Node\Name;
-
 class Movie
 {
     private string $name;

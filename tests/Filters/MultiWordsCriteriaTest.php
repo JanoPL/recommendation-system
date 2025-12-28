@@ -8,9 +8,9 @@ use PHPUnit\Framework\TestCase;
 
 class MultiWordsCriteriaTest extends TestCase
 {
-    protected $criteria;
+    protected MultiWordsCriteria $criteria;
 
-    protected $testData = [
+    protected array $testData = [
         'multi words test',
         'single_words_test',
         'single'

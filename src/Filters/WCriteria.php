@@ -3,11 +3,13 @@
 namespace Recommendations\Filters;
 
 use Recommendations\Exceptions\ArrayEmptyException;
-use Recommendations\Filters\BaseCriteria;
 use Recommendations\Interfaces\RecommendationsInterface;
 
 class WCriteria extends BaseCriteria implements RecommendationsInterface
 {
+    /**
+     * @throws ArrayEmptyException
+     */
     public function filter(array $data): array
     {
         if (empty($data)) {

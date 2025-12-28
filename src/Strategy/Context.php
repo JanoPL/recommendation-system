@@ -2,7 +2,6 @@
 
 namespace Recommendations\Strategy;
 
-use Recommendations\Exceptions\ArrayEmptyException;
 use Recommendations\Strategy\interfaces\FilterStrategyInterface;
 
 class Context
