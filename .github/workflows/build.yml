@@ -11,9 +11,9 @@ jobs:
   test-docker-image:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       
-      - name: Docker Image smoke test
+      - name: Docker Image tests
         run: |
-          docker-compose -f docker/docker-compose.yml up --build \
+          docker compose -f docker/docker-compose.yml up --build \
             --exit-code-from php-cli

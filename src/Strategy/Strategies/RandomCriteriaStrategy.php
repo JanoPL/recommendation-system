@@ -9,6 +9,7 @@ class RandomCriteriaStrategy extends BaseStrategy implements FilterStrategyInter
 {
     /**
      * @param array $data
+     * @return array
      * @throws ArrayEmptyException
      */
     public function filter(array $data = []): array

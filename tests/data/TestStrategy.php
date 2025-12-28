@@ -7,8 +7,10 @@ use Recommendations\Strategy\Strategies\BaseStrategy;
 
 class TestStrategy extends BaseStrategy implements FilterStrategyInterface
 {
-    public function filter(): array
+    public function filter(array $data = []): array
     {
-        return ['test'];
+        return [
+            'test'
+        ];
     }
 }

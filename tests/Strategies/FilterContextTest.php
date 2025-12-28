@@ -4,6 +4,7 @@ namespace Recommendations\Tests\Strategies;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
+use Recommendations\Exceptions\StrategyNotDefinedException;
 use Recommendations\Factories\FilterStrategyFactory;
 use Recommendations\Strategy\Context;
 use Recommendations\StrategyEnum;
@@ -56,6 +57,9 @@ class FilterContextTest extends TestCase
         yield [self::createMovie("Wielki Gatsby")];
     }
 
+    /**
+     * @throws StrategyNotDefinedException
+     */
     public function test_return_random_item(): void
     {
         $factory = FilterStrategyFactory::getInstance();
@@ -68,6 +72,9 @@ class FilterContextTest extends TestCase
         $this->assertCount(3, $actual);
     }
 
+    /**
+     * @throws StrategyNotDefinedException
+     */
     #[DataProvider('evenWMovies')]
     public function test_return_item_started_w($needle): void
     {
@@ -80,6 +87,9 @@ class FilterContextTest extends TestCase
         $this->assertContainsEquals($needle, $actual);
     }
 
+    /**
+     * @throws StrategyNotDefinedException
+     */
     #[DataProvider('evenWMovies')]
     public function test_return_item_with_even_characters($needle): void
     {
@@ -92,6 +102,9 @@ class FilterContextTest extends TestCase
         $this->assertContainsEquals($needle, $actual);
     }
 
+    /**
+     * @throws StrategyNotDefinedException
+     */
     #[DataProvider('multiWordsMovies')]
     public function test_item_with_included_words_greater_than_1($needle): void
     {
@@ -104,6 +117,9 @@ class FilterContextTest extends TestCase
         $this->assertContainsEquals($needle, $actual);
     }
 
+    /**
+     * @throws StrategyNotDefinedException
+     */
     #[DataProvider('multiWordsMovies')]
     public function test_item_with_genre($needle): void
     {
@@ -116,6 +132,9 @@ class FilterContextTest extends TestCase
         $this->assertContainsEquals($needle, $actual);
     }
 
+    /**
+     * @throws StrategyNotDefinedException
+     */
     #[DataProvider('multiWordsSeries')]
     public function test_item_with_seasons_number($needle): void
     {

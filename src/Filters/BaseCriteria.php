@@ -4,7 +4,7 @@ namespace Recommendations\Filters;
 
 abstract class BaseCriteria
 {
-    protected $specialChar = [
+    protected array $specialChar = [
         "-",
         "_",
         "/",

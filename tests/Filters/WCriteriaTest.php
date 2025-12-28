@@ -8,9 +8,9 @@ use PHPUnit\Framework\TestCase;
 
 class WCriteriaTest extends TestCase
 {
-    protected $criteria;
+    protected WCriteria $criteria;
 
-    protected $testData = [
+    protected array $testData = [
         "West word",
         "wTest word",
         "wtest Word",
@@ -34,6 +34,9 @@ class WCriteriaTest extends TestCase
         $this->criteria->filter($data);
     }
 
+    /**
+     * @throws ArrayEmptyException
+     */
     public function test_return_elements_start_with_w(): void
     {
         $actual = $this->criteria->filter($this->testData);

@@ -25,6 +25,9 @@ class RecommendStrategy
         return $context->filter();
     }
 
+    /**
+     * @throws StrategyNotDefinedException
+     */
     public function multiEvenWCriteria($data): array
     {
         $context = new Context();
@@ -33,6 +36,9 @@ class RecommendStrategy
         return  $context->filter();
     }
 
+    /**
+     * @throws StrategyNotDefinedException
+     */
     public function multiWordsCriteria($data): array
     {
         $context = new Context();
@@ -40,6 +46,9 @@ class RecommendStrategy
         return $context->filter();
     }
 
+    /**
+     * @throws StrategyNotDefinedException
+     */
     public function genreCriteria($data): array
     {
         $context = new Context();
@@ -47,6 +56,9 @@ class RecommendStrategy
         return $context->filter();
     }
 
+    /**
+     * @throws StrategyNotDefinedException
+     */
     public function seasonNumberCriteria($data): array
     {
         $context = new Context();

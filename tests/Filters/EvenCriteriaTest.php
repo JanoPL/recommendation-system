@@ -8,9 +8,9 @@ use PHPUnit\Framework\TestCase;
 
 class EvenCriteriaTest extends TestCase
 {
-    protected $criteria;
+    protected EvenCriteria $criteria;
 
-    protected $testData = [
+    protected array $testData = [
         "West word",
         "wTest word",
         "wtest Word",
@@ -34,6 +34,9 @@ class EvenCriteriaTest extends TestCase
         $this->criteria->filter($data);
     }
 
+    /**
+     * @throws ArrayEmptyException
+     */
     public function test_even_return_elements(): void
     {
         $actual = $this->criteria->filter($this->testData);

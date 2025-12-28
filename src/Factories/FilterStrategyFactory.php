@@ -2,6 +2,7 @@
 
 namespace Recommendations\Factories;
 
+use Exception;
 use Recommendations\Exceptions\StrategyNotDefinedException;
 use Recommendations\Strategy\Strategies\EvenStrategy;
 use Recommendations\Strategy\Strategies\GenreStrategy;
@@ -14,7 +15,7 @@ use Recommendations\StrategyEnum;
 class FilterStrategyFactory
 {
     // Hold the single instance of the factory
-    private static $instance;
+    private static ?FilterStrategyFactory $instance = null;
 
     // Prevent creating a new instance of the factory
     private function __construct()
@@ -32,7 +33,7 @@ class FilterStrategyFactory
     }
 
     // Get the single instance of the factory
-    public static function getInstance()
+    public static function getInstance(): FilterStrategyFactory
     {
         if (self::$instance == null) {
             self::$instance = new FilterStrategyFactory();
@@ -45,7 +46,7 @@ class FilterStrategyFactory
      * @param StrategyEnum $strategy
      * @param array $data
      * @return mixed
-     * @throws StrategyNotDefinedException
+     * @throws StrategyNotDefinedException|Exception
      */
     public function createStrategy(StrategyEnum $strategy, array $data): mixed
     {
@@ -56,6 +57,7 @@ class FilterStrategyFactory
             StrategyEnum::Random => new RandomCriteriaStrategy($data),
             StrategyEnum::SeasonNumber => new SeasonsNumberStrategy($data),
             StrategyEnum::WCriteria => new WCriteriaStrategy($data),
+            StrategyEnum::All => throw new Exception('To be implemented'),
         };
     }
 }
